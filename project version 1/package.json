@@ -1,0 +1,20 @@
+{
+  "name": "randomchatportalproject",
+  "version": "1.0.0",
+  "description": "this is for the chat web application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon server.js"
+  },
+  "author": "Amit",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "simple-peer": "^9.11.0",
+    "socket.io": "^4.1.3",
+    "uuid": "^8.3.2"
+  }
+}
