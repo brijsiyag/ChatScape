@@ -1,7 +1,4 @@
-// // const name = prompt("Enter your name");
 const socket = io();
-// const userName = prompt("Enter your name to join");
-
 const form = document.getElementById("send-container");
 const messageInput = document.getElementById("messageInp");
 const messageContainer = document.querySelector(".container");
@@ -72,6 +69,7 @@ socket.on("user-disconnected", (userId) => {
   } else if (joinLeaveBtn.innerText == "Leave") {
     joinLeaveBtn.innerText = "Join";
   }
+
 });
 
 function append(message, position) {
