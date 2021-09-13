@@ -86,6 +86,13 @@ body {
   color: aliceblue;
   font-size: 15px;
 }
+
+#connection-message{
+  /* top: 50px; */
+  position: relative;
+  background-color: rgb(23, 0, 77);
+  padding: 5px;
+}
 .logo {
   display: block;
   margin: auto;
