@@ -228,4 +228,13 @@ video {
     width: 100%;
     /* background-color: red; */
   }
+  .self-video{
+    position: absolute;
+    height: 120px;
+    width: 88px;
+  }
+  .video{
+    height: 100%;
+    width: 100%;
+  }
 }

@@ -14,6 +14,7 @@ const peers = {};
 const joinLeaveBtn = document.querySelector(".join-leave-btn");
 const videoGrid = document.querySelector(".vc");
 const myVideo = document.createElement("video");
+myVideo.classList.add("self-video");
 myVideo.muted = true;
 navigator.mediaDevices
   .getUserMedia({
@@ -70,6 +71,9 @@ socket.on("user-disconnected", (userId) => {
   if (joinLeaveBtn.innerText == "Join") {
     joinLeaveBtn.innerText = "Leave";
   } else if (joinLeaveBtn.innerText == "Leave") {
+
+
+
     joinLeaveBtn.innerText = "Join";
   }
 });
@@ -110,15 +114,23 @@ joinLeaveBtn.addEventListener("click", (e) => {
     const video = document.querySelector(".video");
     video.remove();
     // append(`Stranger left the chat`, 'middle');
+
+
+	const deletingMessages = document.querySelectorAll(".message");
+	deletingMessages.forEach(e=>e.remove());
+
+
     socket.emit("leave", { socketId: socketId });
   }
 });
 
 socket.on("disconnection", (name) => {
-  append(`Stranger left the chat`, "middle");
+	const deletingMessages = document.querySelectorAll(".message");
+	deletingMessages.forEach(e=>e.remove());
+  	append(`Stranger left the chat`, "middle");
 });
 
-socket.emit("new-user-joined", "Birju");
+// socket.emit("new-user-joined", "Birju");
 
 socket.on("user-joined", (name1) => {
   append(`${name1} joined the chat`, "right");
@@ -132,6 +144,3 @@ socket.on("leave", (name) => {
   append(`Stranger left the chat`, "middle");
 });
 
-socket.on("status", (stat) => {
-  status.innerText = stat;
-});

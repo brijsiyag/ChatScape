@@ -72,28 +72,23 @@ io.on("connection", (socket) => {
     const stat = "Disconnected";
     socket.emit("status", stat);
     socket.to(socketPair[socket.id]).emit("status", stat);
+    let tempData = socketPair[socket.id];
     delete socketPair[socket.id];
-    delete socketPair[socketPair[socket.id]];
+    delete socketPair[tempData];
   }
 
   socket.on("leave", (data) => {
     socket.to(socketPair[socket.id]).emit("disconnection", "Stranger");
-    socket
-      .to(socketPair[socket.id])
-      .emit("user-disconnected", peerId[socket.id]);
+    socket.to(socketPair[socket.id]).emit("user-disconnected", peerId[socket.id]);
     left();
   });
 
   socket.on("send", (message) => {
-    socket
-      .to(socketPair[socket.id])
-      .emit("receive", { message: message, name: "Stranger" });
+    socket.to(socketPair[socket.id]).emit("receive", { message: message, name: "Stranger" });
   });
   socket.on("disconnect", (message) => {
     socket.to(socketPair[socket.id]).emit("disconnection", "Stranger");
-    socket
-      .to(socketPair[socket.id])
-      .emit("user-disconnected", peerId[socket.id]);
+    socket.to(socketPair[socket.id]).emit("user-disconnected", peerId[socket.id]);
     left();
   });
 });
