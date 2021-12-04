@@ -2,6 +2,7 @@ const socket = io();
 const form = document.getElementById("send-container");
 const messageInput = document.getElementById("messageInp");
 const messageContainer = document.querySelector(".container");
+const message = document.querySelectorAll(".message");
 const status = document.querySelector(".wait");
 let socketId;
 
@@ -63,13 +64,11 @@ socket.on("user-disconnected", (userId) => {
   }
   const video = document.querySelector(".video");
   video.remove();
-
   if (joinLeaveBtn.innerText == "Join") {
     joinLeaveBtn.innerText = "Leave";
   } else if (joinLeaveBtn.innerText == "Leave") {
     joinLeaveBtn.innerText = "Join";
   }
-
 });
 
 function append(message, position) {
@@ -107,12 +106,18 @@ joinLeaveBtn.addEventListener("click", (e) => {
     //  }
     const video = document.querySelector(".video");
     video.remove();
+
+    const deletingMessages = document.querySelectorAll(".message");
+    deletingMessages.forEach(e => e.remove())
+
+
     // append(`Stranger left the chat`, 'middle');
     socket.emit("leave", { socketId: socketId });
   }
 });
 
 socket.on("disconnection", (name) => {
+  messageContainer.innerHTML = "";
   append(`Stranger left the chat`, "middle");
 });
 
@@ -133,3 +138,7 @@ socket.on("leave", (name) => {
 socket.on("status", (stat) => {
   status.innerText = stat;
 });
+
+socket.on("messageDelete", message => {
+  message.innerText = message;
+})
